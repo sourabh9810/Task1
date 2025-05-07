@@ -1,5 +1,9 @@
 const categories = [
-  { id: 1, name: "Cars", icon: "🚗" },
+  { id: 1, name: "Cars", icon: "🚗",
+    subcategories:[
+      "Cars"
+    ]
+   },
   {
     id: 2,
     name: "Properties",
