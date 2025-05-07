@@ -31,7 +31,15 @@ export default function PostAdForm() {
   };
 
   return (
-    <form style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <form style={{ 
+      display: "flex", 
+      flexDirection: "column", 
+      gap: "10px",
+      width: "700px",
+      padding: "20px",
+      boxSizing: "border-box",
+      borderRight: "1px solid #ccc"
+    }}>
       <h2>Post Your Ad</h2>
 
       <select name="brand" onChange={handleChange} required>
@@ -42,15 +50,17 @@ export default function PostAdForm() {
 
       <input type="number" name="year" placeholder="Year" onChange={handleChange} required />
 
-      <div style={{ display: "flex", gap: "10px" }}>
+      <div style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
         {["Petrol", "Diesel", "CNG", "Electric"].map((fuel) => (
           <button
             type="button"
             key={fuel}
             style={{
               border: "1px solid gray",
-              padding: "5px 10px",
+              padding: "5px 8px",
               backgroundColor: formData.fuel === fuel ? "#add8e6" : "",
+              borderRadius: "4px",
+              fontSize: "14px"
             }}
             onClick={() => setFormData((prev) => ({ ...prev, fuel }))}
           >

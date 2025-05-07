@@ -180,4 +180,85 @@ body {
   margin: 5px 0;
 }
 
+/* Form Styles */
+form {
+  width: 300px;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  border-right: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+form h2 {
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  color: #333;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Fuel buttons container */
+form div[style*="display: flex"][style*="gap: 5px"] {
+  margin-bottom: 10px;
+}
+
+/* Image preview grid */
+form div[style*="display: flex"] img {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+form button[type="submit"]:hover {
+  background: #0056b3;
+}
+
+/* File upload button styling */
+form input[type="file"] {
+  padding: 10px;
+  background: #f8f9fa;
+  border: 2px dashed #ddd;
+}
+
+/* Preview images container */
+form div[style*="display: flex"] {
+  gap: 10px;
+  margin: 15px 0;
+}
+
+form img {
+  border-radius: 6px;
+  border: 2px solid #ddd;
+}
+
 
