@@ -29,33 +29,59 @@ const allItems = [
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showPostForm, setShowPostForm] = useState(false);
+  const [formState, setFormState] = useState({
+    category: '',
+    subcategory: ''
+  });
   
-  const filteredItems = !selectedCategory
-    ? allItems
-    : allItems.filter((item) => item.category === selectedCategory.name);
-
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
-    setShowPostForm(category.name === "Cars");
+    
+    if (category.selectedSubcategory) {
+      setFormState({
+        category: category.name,
+        subcategory: category.selectedSubcategory
+      });
+      setShowPostForm(true);
+    } else {
+      setShowPostForm(false);
+    }
   };
 
   return (
-    <div className="app-container">
-      <CategoryList
-        categories={categories}
-        selectedId={selectedCategory?.id}
-        onSelect={handleCategorySelect}
-      />
+    <div className="main-container">
       {showPostForm ? (
-        <PostAdForm />
-      ) : (
-        <CategoryDetails 
-          selectedCategory={selectedCategory?.name} 
-          items={filteredItems}
+        <PostAdForm 
+          category={formState.category}
+          subcategory={formState.subcategory}
+          onBack={() => setShowPostForm(false)}
         />
+      ) : (
+        <div className="app-container">
+          <div className="category-section">
+            <h2 className="category-title">Choose a Category</h2>
+            <CategoryList
+              categories={categories}
+              selectedId={selectedCategory?.id}
+              onSelect={handleCategorySelect}
+            />
+          </div>
+          
+          <div className="content-section">
+            <CategoryDetails 
+              selectedCategory={selectedCategory}
+              items={selectedCategory ? allItems.filter(item => item.category === selectedCategory.name) : allItems}
+            />
+          </div>
+        </div>
       )}
     </div>
   );
 }
 
 export default App;
+
+
+
+
+

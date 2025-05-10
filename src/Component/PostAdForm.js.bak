@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "./PostAdForm.css";
 
 const PostAdForm = () => {
   const [formData, setFormData] = useState({
@@ -20,8 +19,8 @@ const PostAdForm = () => {
   });
   
   const [activeTab, setActiveTab] = useState("LIST");
-  // const [currentState, setCurrentState] = useState("");
-const [states, setState] = useState([]);
+  const [currentState, setCurrentState] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -122,8 +121,7 @@ const [states, setState] = useState([]);
       <div className="form-section">
         <label>Price *</label>
         <input type="text" name="price" value={formData.price} onChange={handleChange} />
-      </div>     
-       <div className="form-section">
+      </div>      <div className="form-section">
         <label>Upload up to 20 photos</label>
           <div className="photo-grid">
           {[...Array(20)].map((_, index) => (
@@ -148,78 +146,77 @@ const [states, setState] = useState([]);
         </div>
       </div>
 
-      {/* <div className="form-section"> */}
-        {/* <label>State *</label> */}
-        {/* <select name="state" value={formData.state} onChange={handleChange}>
+      <div className="form-section">
+        <label>State *</label>
+        <select name="state" value={formData.state} onChange={handleChange}>
           <option value="">Select State</option>
           <option value="UP">Uttar Pradesh</option>
           <option value="MH">Maharashtra</option>
           <option value="DL">Delhi</option>
           <option value="HR">Haryana</option>
           <option value="RJ">Rajasthan</option>
-        </select>       */}
-      {/* </div> */}
+        </select>      </div>
 
-      <div style={{ fontFamily: "Arial, sans-serif", maxWidth: "600px", margin: "40px auto" , marginRight:"170px" }}>
-      <h2 style={{ fontWeight: "bold" ,  }}>CONFIRM YOUR LOCATION</h2>
+      <div className="form-section profile-section">
+        <div className="profile-header">
+          <div className="avatar-wrapper">
+            <label htmlFor="profile-photo" className="avatar clickable">
+              {formData.profilePhoto ? (
+                <img
+                  src={URL.createObjectURL(formData.profilePhoto)}
+                  alt="Profile"
+                  className="avatar-img"
+                />
+              ) : (
+                <>
+                  <span className="initial">{formData.name.charAt(0)}</span>
+                  <div className="camera-overlay">📷</div>
+                </>
+              )}
+            </label>
+            <input
+              type="file"
+              id="profile-photo"
+              accept="image/*"
+              onChange={(e) => setFormData({ ...formData, profilePhoto: e.target.files[0] })}
+              style={{ display: "none" }}
+            />
+          </div>
+          <div className="profile-info">
+            <div className="name-box">
+              <input 
+                type="text" 
+                value={formData.name} 
+                disabled 
+                className="name-input"
+              />
+            </div>
+          </div>
+        </div>      </div>
 
-      {/* Tabs */}
-      <div style={{ display: "flex", marginTop: "40px", borderBottom: "1px solid #ccc" }}>
-        <div
-          onClick={() => setActiveTab("LIST")}
-          style={{
-            fontWeight: "bold",
-            marginRight: "150px",
-            marginLeft: "0px",
-            paddingBottom: "30px",
-            cursor: "pointer",
-            borderBottom: activeTab === "LIST" ? "3px solid #0039cb" : "none",
-            color: activeTab === "LIST" ? "#000" : "#888"
-          }}
-        >
-          LIST
-        </div>
-        <div
-          onClick={() => setActiveTab("CURRENT LOCATION")}
-          style={{
-            fontWeight: "normal",
-            paddingBottom: "6px",
-            cursor: "pointer",
-            color: activeTab === "CURRENT LOCATION" ? "#000" : "#888"
-          }}
-        >
-          CURRENT LOCATION
+      <div className="form-section verification-section">
+        <h3 className="section-title">Let's verify your account</h3>
+        <p className="note-text">We will send you a confirmation code by sms on the next step.</p>
+        <div className="phone-input-container">
+          <input
+            type="tel"
+            name="phone"
+            placeholder="+91"
+            value={formData.phone}
+            onChange={handleChange}
+            className="phone-input"
+          />
         </div>
       </div>
 
-      {/* State Dropdown */}
-      <div style={{ marginTop: "30px" }}>
-        <label htmlFor="state" style={{ fontWeight: "500" }}>State *</label><br />
-        <select
-         onChange={(e) => setState(e.target.value)}
-         
-
-          style={{
-            width: "100%",
-            padding: "10px",
-            fontSize: "16px",
-            marginTop: "5px",
-            borderRadius: "4px",
-            border: "1px solid #aaa"
-          }}
-        >
-          <option value="" disabled>Select your state</option>
-          {/* {states.map((st) => ( */}
-          {Array.isArray(states) &&
-           states.map((state) => (
-            <option key={state.id}>{state.name}</option>
-            // <option key={st} value={st}>{st}</option>
-          ))}
-        </select>
+      <div className="form-section">
+        <button type="submit" className="submit-button">Post Ad</button>
       </div>
-    </div>
-    
-    <div style={{ fontFamily: "Arial, sans-serif", maxWidth: "750px", margin: "40px auto" }}>
+    </form>
+  );
+};
+
+export default PostAdForm;
       <h2 style={{ fontWeight: "bold" }}>REVIEW YOUR DETAILS</h2>
 
       <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
