@@ -20,8 +20,7 @@ const PostAdForm = () => {
   });
   
   const [activeTab, setActiveTab] = useState("LIST");
-  // const [currentState, setCurrentState] = useState("");
-const [states, setState] = useState([]);
+  const [states, setState] = useState([]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -30,9 +29,10 @@ const [states, setState] = useState([]);
   const handleRadioChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
   };
-
   const handleFileChange = (e) => {
-    const files = Array.from(e.target.files).slice(0, 20);
+    const newFiles = Array.from(e.target.files);
+    const totalFiles = [...formData.photos, ...newFiles];
+    const files = totalFiles.slice(0, 20); // Limit to 20 photos
     setFormData({ ...formData, photos: files });
   };
 
@@ -43,6 +43,7 @@ const [states, setState] = useState([]);
   };
 
   return (
+    
     <form className="form-container" onSubmit={handleSubmit}>
       <h2 className="form-title">Post Your Ad</h2>
 
@@ -123,18 +124,27 @@ const [states, setState] = useState([]);
         <label>Price *</label>
         <input type="text" name="price" value={formData.price} onChange={handleChange} />
       </div>     
-       <div className="form-section">
+      <div className="form-section">
         <label>Upload up to 20 photos</label>
           <div className="photo-grid">
           {[...Array(20)].map((_, index) => (
             <div
               key={index}
-              className={`photo-slot ${index === 0 ? "add-photo" : ""}`}
-              onClick={index === 0 ? () => document.getElementById("photoInput").click() : undefined}
-            ><>
-                <span className="camera-icon">📷</span>
-                <span className="photo-text">{index === 0 ? 'Add Photo' : 'Upload'}</span>
-              </>
+              className={`photo-slot ${formData.photos[index] ? "has-image" : ""}`}
+              onClick={() => document.getElementById("photoInput").click()}
+            >
+              {formData.photos[index] ? (
+                <img 
+                  src={URL.createObjectURL(formData.photos[index])} 
+                  alt={`Upload ${index + 20}`}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                <>
+                  <span className="camera-icon">📷</span>
+                  <span className="photo-text">Add Photo</span>
+                </>
+              )}
             </div>
           ))}
           <input
@@ -147,18 +157,6 @@ const [states, setState] = useState([]);
           />
         </div>
       </div>
-
-      {/* <div className="form-section"> */}
-        {/* <label>State *</label> */}
-        {/* <select name="state" value={formData.state} onChange={handleChange}>
-          <option value="">Select State</option>
-          <option value="UP">Uttar Pradesh</option>
-          <option value="MH">Maharashtra</option>
-          <option value="DL">Delhi</option>
-          <option value="HR">Haryana</option>
-          <option value="RJ">Rajasthan</option>
-        </select>       */}
-      {/* </div> */}
 
       <div style={{ fontFamily: "Arial, sans-serif", maxWidth: "600px", margin: "40px auto" , marginRight:"170px" }}>
       <h2 style={{ fontWeight: "bold" ,  }}>CONFIRM YOUR LOCATION</h2>
@@ -209,11 +207,9 @@ const [states, setState] = useState([]);
           }}
         >
           <option value="" disabled>Select your state</option>
-          {/* {states.map((st) => ( */}
           {Array.isArray(states) &&
            states.map((state) => (
             <option key={state.id}>{state.name}</option>
-            // <option key={st} value={st}>{st}</option>
           ))}
         </select>
       </div>
@@ -239,7 +235,6 @@ const [states, setState] = useState([]);
           <div style={{
             position: "absolute",
             bottom: 2,
-            // backgroundColor: "#004d40",
             backgroundColor:"lightgray",
             
             width: "40%",

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import CategoryList from './Component/CategoryList';
-import CategoryDetails from './Component/CategoryDetails';
+import CategoryDetails from './Component/CategoryDetails'; 
 import categories from './DATA/categories';
 import './App.css';
 import PostAdForm from './Component/PostAdForm';
+import PropertyForm from './Component/PropertyForm';
 
 const allItems = [
   {
@@ -29,6 +30,7 @@ const allItems = [
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showPostForm, setShowPostForm] = useState(false);
+  const [showPropertyForm, setShowPropertyForm] = useState(false);
   const [formState, setFormState] = useState({
     category: '',
     subcategory: ''
@@ -37,26 +39,35 @@ function App() {
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
     
-    if (category.selectedSubcategory) {
+    if (category.name === "Properties") {
+      setShowPropertyForm(true);
+      setShowPostForm(false);
+    } else if (category.selectedSubcategory) {
       setFormState({
         category: category.name,
         subcategory: category.selectedSubcategory
       });
       setShowPostForm(true);
+      setShowPropertyForm(false);
     } else {
       setShowPostForm(false);
+      setShowPropertyForm(false);
     }
   };
 
   return (
     <div className="main-container">
-      {showPostForm ? (
+      {showPropertyForm ? (
+        <PropertyForm />
+      ) 
+      : showPostForm ? (
         <PostAdForm 
           category={formState.category}
           subcategory={formState.subcategory}
           onBack={() => setShowPostForm(false)}
         />
-      ) : (
+      ) 
+      : (
         <div className="app-container">
           <div className="category-section">
             <h2 className="category-title">Choose a Category</h2>
@@ -64,13 +75,6 @@ function App() {
               categories={categories}
               selectedId={selectedCategory?.id}
               onSelect={handleCategorySelect}
-            />
-          </div>
-          
-          <div className="content-section">
-            <CategoryDetails 
-              selectedCategory={selectedCategory}
-              items={selectedCategory ? allItems.filter(item => item.category === selectedCategory.name) : allItems}
             />
           </div>
         </div>

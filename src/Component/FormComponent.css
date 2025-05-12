@@ -1,0 +1,189 @@
+body {
+  width: 80%;
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #f7f8f9;
+}
+
+ .button-group{
+  display: flex;
+  margin-bottom: 30px;
+  gap: 15px;
+  width: 30px;
+  margin-top: 10px;
+}
+.button-group button {
+  padding: 7px 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: #002f34;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.button-group button:hover {
+  /* background-color: #004a53; */
+  background-color: aqua;
+    /* background-color: #f0f0f0; */
+
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.change-link {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  padding: 30px;
+}
+
+/* Property specific input styles */
+input[name="superBuiltupArea"],
+input[name="carpetArea"],
+input[name="maintenance"],
+input[name="floorNo"],
+input[name="totalFloors"],
+select[name="facing"] {
+  width: 60% !important;
+  font-size: 16px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  padding: 18px;
+}
+
+
+
+.form-title {
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: 300px;
+  margin-top: -20px;
+    margin-bottom: 4%;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 2fr);
+  gap: 8px;
+  margin-top: 15px;
+  padding: 0;
+  max-width: 200px;
+}
+
+.photo-slot {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 24px;
+  cursor: default;
+  background-color: #f9f9f9;
+}
+
+.photo-slot.add-photo {
+  border: 2px dashed #002f34;
+  cursor: pointer;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.photo-slot.add-photo:hover {
+  border-color: #3a77ff;
+  background-color: #f0f7ff;
+}
+
+.photo-slot .camera-icon {
+  font-size: 22px;
+  color: #002f34;
+  margin-bottom: 4px;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.photo-slot .photo-text {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.photo-slot:hover {
+  border-color: #3a77ff;
+  background-color: #f8f9fa;
+}
+
+.submit-button {
+  /* width: 100%; */
+  max-width: 70%;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  /* background-color: #002f34; */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.submit-button:hover {
+  background-color: #004a53;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* .sidebar {
+  width: 200px;
+  background-color: #f0f0f0;
+  padding: 16px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+} */
+
+/* .sidebar button {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  text-align: left;
+} */
+
+/* .sidebar button:hover {
+  background-color: #e0e0e0;
+} */
+
+
+
