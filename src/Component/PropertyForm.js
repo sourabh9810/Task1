@@ -52,7 +52,7 @@ export default function PropertyForm() {
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
-      <h2 className="form-title">Post Your Property Ad</h2>
+      <h2 className="form-title">Post Your Ad</h2>
       <h3>SELECTED CATEGORY</h3>
       <p>Properties / For Sale: Houses & Apartments <span className="change-link">Change</span></p>
 
@@ -118,7 +118,7 @@ export default function PropertyForm() {
       </div>
 
       <div className="form-section">
-        <div style={{ maxWidth: "750px", margin: "0 auto" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <label>Super Builtup area (sqft) *</label>
           <input type="text" name="superBuiltupArea" value={formData.superBuiltupArea} onChange={handleChange} />
 
