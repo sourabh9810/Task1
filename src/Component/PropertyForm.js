@@ -26,7 +26,7 @@ export default function PropertyForm() {
   });
 
   const [activeTab, setActiveTab] = useState("LIST");
-  const [states, setState] = useState([]);
+  const [states, setStates] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

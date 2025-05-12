@@ -20,7 +20,7 @@ const PostAdForm = () => {
   });
   
   const [activeTab, setActiveTab] = useState("LIST");
-  const [states, setState] = useState([]);
+  const [states, setStates] = useState([]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -194,7 +194,7 @@ const PostAdForm = () => {
       <div style={{ marginTop: "30px" }}>
         <label htmlFor="state" style={{ fontWeight: "500" }}>State *</label><br />
         <select
-         onChange={(e) => setState(e.target.value)}
+         onChange={(e) => setStates(e.target.value)}
          
 
           style={{

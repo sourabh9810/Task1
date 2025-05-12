@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CategoryList from './Component/CategoryList';
-import CategoryDetails from './Component/CategoryDetails'; 
+// import CategoryDetails from './Component/CategoryDetails'; 
 import categories from './DATA/categories';
 import './App.css';
 import PostAdForm from './Component/PostAdForm';
