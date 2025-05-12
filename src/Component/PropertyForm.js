@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './FormComponent.css';
 
-export default function PropertyForm() {
+export default function PropertyForm({ onSubmit }) {
   const [formData, setFormData] = useState({
     type: '',
     bhk: '',
@@ -24,13 +24,19 @@ export default function PropertyForm() {
     floorNo: '',
     facing: ''
   });
-
   const [activeTab, setActiveTab] = useState("LIST");
-  const [states, setStates] = useState([]);
+  const states = [
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Delhi", 
+    "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", 
+    "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", 
+    "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", 
+    "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    console.log('Updated form data:', { ...formData, [name]: value });
   };
 
   const handleRadioChange = (name, value) => {
@@ -42,13 +48,32 @@ export default function PropertyForm() {
     const totalFiles = [...formData.photos, ...newFiles];
     const files = totalFiles.slice(0, 20);
     setFormData({ ...formData, photos: files });
+  };  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      console.log("Form data being submitted:", formData);
+      onSubmit(formData);
+    }
+  };
+  const validateForm = () => {
+    const requiredFields = ['type', 'bhk', 'bathrooms', 'superBuiltupArea', 'price', 'state', 'phone'];
+    let isValid = true;
+    
+    requiredFields.forEach(field => {
+      if (!formData[field]) {
+        // alert(`Please fill in the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()} field.`);
+        isValid = false;
+      }
+    });
+
+    if (!formData.photos || formData.photos.length === 1) {
+      alert('Please upload at least one photo');
+      isValid = false;
+    }
+
+    return isValid;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted:", formData);
-    alert("Property Ad Posted Successfully!");
-  };
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
@@ -279,9 +304,9 @@ export default function PropertyForm() {
         </div>
 
         <div style={{ marginTop: "30px" }}>
-          <label htmlFor="state" style={{ fontWeight: "500" }}>State *</label><br />
-          <select
+          <label htmlFor="state" style={{ fontWeight: "500" }}>State *</label><br />          <select
             name="state"
+            value={formData.state}
             onChange={handleChange}
             style={{
               width: "100%",
@@ -292,11 +317,10 @@ export default function PropertyForm() {
               border: "1px solid #aaa"
             }}
           >
-            <option value="" disabled>Select your state</option>
-            {Array.isArray(states) &&
-              states.map((state) => (
-                <option key={state.id}>{state.name}</option>
-              ))}
+            <option value="">Select State</option>
+            {states.map((state) => (
+              <option key={state} value={state}>{state}</option>
+            ))}
           </select>
         </div>
       </div>
