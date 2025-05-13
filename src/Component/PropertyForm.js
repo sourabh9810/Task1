@@ -86,8 +86,6 @@ const handleRemovePhoto = (index) => {
   setFormData({ ...formData, photos: newPhotos });
 };
 
-
-
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <h2 className="form-title">Post Your Ad</h2>

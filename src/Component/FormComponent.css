@@ -30,11 +30,6 @@
   cursor: pointer;
   
 }
-
-
-
-
-
 h3 {
   font-size: 20px;
 }
@@ -44,10 +39,6 @@ h3 {
   cursor: pointer;
   text-decoration: underline;
 } 
-
-
-
-
 
 /* Property specific input styles */
 input[name="superBuiltupArea"],
@@ -64,8 +55,6 @@ select[name="facing"] {
   padding: 17px;
 }
 
-
-
 .form-title {
   font-size: 25px;
   font-weight: bold;
@@ -73,8 +62,6 @@ select[name="facing"] {
   margin-top: -20px;
     margin-bottom: 4%;
 }
-
-
 
 .photo-slot {
    position: relative;
