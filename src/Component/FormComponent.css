@@ -1,46 +1,49 @@
-/* body {
+.body {
   width: 80%;
   margin: 0;
   font-family: sans-serif;
   background-color: #f7f8f9;
-} */
+} 
 
- .button-group{
+.button-group{
   display: flex;
-  margin-bottom: 30px;
-  gap: 15px;
-  width: 30px;
-  margin-top: 10px;
+  gap: 10px;
+  position: relative;
+  align-items: flex-start;
+  border-radius: 4px; 
+  appearance: none;
+  grid-template-rows: repeat(2, 1fr); 
+  flex-wrap: wrap;
+  flex: 0 0 calc(20% - 0px);
 }
 .button-group button {
-  padding: 7px 20px;
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-  background-color: #002f34;
-  border: none;
-  border-radius: 8px;
+  /* width: 100%; */
+  margin-right: 8px;
+  min-width: 75px;
+  /* margin-bottom: 8px; */
+  height: 100;
+  margin: 4px 0;
+  font-size: 13px;
+  padding: 8px 16px;
+  color: black;
+  background-color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
+  
 }
-.button-group button:hover {
-  /* background-color: #004a53; */
-  background-color: aqua;
-    /* background-color: #f0f0f0; */
 
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+
+
+
 
 h3 {
   font-size: 20px;
-  margin-bottom: 5px;
 }
 
 .change-link {
   color: #007bff;
   cursor: pointer;
-}
+  text-decoration: underline;
+} 
 
 
 
@@ -53,12 +56,12 @@ input[name="maintenance"],
 input[name="floorNo"],
 input[name="totalFloors"],
 select[name="facing"] {
-  width: 60% !important;
+  width: 60% ;
   font-size: 16px;
   margin-top: 5px;
   border-radius: 4px;
   border: 1px solid #aaa;
-  padding: 18px;
+  padding: 17px;
 }
 
 
@@ -71,21 +74,14 @@ select[name="facing"] {
     margin-bottom: 4%;
 }
 
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 2fr);
-  gap: 8px;
-  margin-top: 15px;
-  padding: 0;
-  max-width: 200px;
-}
+
 
 .photo-slot {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  border: 2px dashed #ccc;
-  border-radius: 8px;
+   position: relative;
+  width: calc(25% - 12px);
+  height: 108px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,14 +92,13 @@ select[name="facing"] {
 }
 
 .photo-slot.add-photo {
-  border: 2px dashed #002f34;
   cursor: pointer;
   background-color: #fff;
-  transition: all 0.3s ease;
+  /* transition: all 0.3s ease; */
 }
 
 .photo-slot.add-photo:hover {
-  border-color: #3a77ff;
+  /* border-color: #3a77ff; */
   background-color: #f0f7ff;
 }
 
@@ -111,7 +106,7 @@ select[name="facing"] {
   font-size: 22px;
   color: #002f34;
   margin-bottom: 4px;
-  transition: all 0.3s ease;
+  /* transition: all 0.3s ease; */
   opacity: 0.7;
 }
 
@@ -123,18 +118,44 @@ select[name="facing"] {
 }
 
 .photo-slot:hover {
-  border-color: #3a77ff;
+  /* border-color: #3a77ff; */
   background-color: #f8f9fa;
+} 
+
+.cover-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .submit-button {
-  /* width: 100%; */
   max-width: 70%;
   padding: 15px 30px;
   font-size: 18px;
   font-weight: bold;
   color: white;
-  /* background-color: #002f34; */
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -142,35 +163,7 @@ select[name="facing"] {
   display: block;
 }
 
-.submit-button:hover {
-  background-color: #004a53;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
-
-
-/* .sidebar {
-  width: 200px;
-  background-color: #f0f0f0;
-  padding: 16px;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-} */
-
-/* .sidebar button {
-  display: block;
-  margin-bottom: 10px;
-  padding: 10px;
-  width: 100%;
-  background-color: white;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  text-align: left;
-} */
-
-/* .sidebar button:hover {
-  background-color: #e0e0e0;
-} */
 
 
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './FormComponent.css';
 
+
 export default function PropertyForm({ onSubmit }) {
   const [formData, setFormData] = useState({
     type: '',
@@ -66,13 +67,25 @@ export default function PropertyForm({ onSubmit }) {
       }
     });
 
-    if (!formData.photos || formData.photos.length === 1) {
+    if (!formData.photos || formData.photos.length === 0) {
       alert('Please upload at least one photo');
       isValid = false;
     }
 
     return isValid;
   };
+  const handleSetCover = (index) => {
+  console.log(`Set photo ${index} as cover`);
+  // Yahan formData me cover photo set karne ki logic likho
+};
+
+const handleRemovePhoto = (index) => {
+  console.log(`Remove photo at index ${index}`);
+  const newPhotos = [...formData.photos];
+  newPhotos.splice(index, 1);
+  setFormData({ ...formData, photos: newPhotos });
+};
+
 
 
   return (
@@ -239,43 +252,64 @@ export default function PropertyForm({ onSubmit }) {
       </div>
 
       <div className="form-section">
-        <label>Upload up to 20 photos</label>
-        <div className="photo-grid">
-          {[...Array(20)].map((_, index) => (
-            <div
-              key={index}
-              className={`photo-slot ${formData.photos[index] ? "has-image" : ""}`}
-              onClick={() => document.getElementById("photoInput").click()}
+  <label>Upload up to 20 photos</label>
+  <div className="photo-grid">
+    {[...Array(20)].map((_, index) => (
+      <div
+        key={index}
+        className={`photo-slot ${formData.photos[index] ? "has-image" : ""}`}
+        onClick={() => document.getElementById("photoInput").click()}
+      >
+        {formData.photos[index] ? (
+          <>
+            <img
+              src={URL.createObjectURL(formData.photos[index])}
+              alt={`Upload ${index + 1}`}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+            <button
+              className="cover-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSetCover(index);
+              }}
             >
-              {formData.photos[index] ? (
-                <img 
-                  src={URL.createObjectURL(formData.photos[index])} 
-                  alt={`Upload ${index + 1}`}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-              ) : (
-                <>
-                  <span className="camera-icon">📷</span>
-                  <span className="photo-text">Add Photo</span>
-                </>
-              )}
-            </div>
-          ))}
-          <input
-            type="file"
-            id="photoInput"
-            accept="image/*"
-            multiple
-            style={{ display: "none" }}
-            onChange={handleFileChange}
-          />
-        </div>
+              Cover
+            </button>
+            <button
+              className="close-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRemovePhoto(index);
+              }}
+            >
+              ×
+            </button>
+          </>
+        ) : (
+          <>
+            <span className="camera-icon">📷</span>
+            <span className="photo-text">Add Photo</span>
+          </>
+        )}
       </div>
+    ))}
+    <input
+      type="file"
+      id="photoInput"
+      accept="image/*"
+      multiple
+      style={{ display: "none" }}
+      onChange={handleFileChange}
+    />
+  </div>
+</div>
+
 
       <div className="location-section" style={{ fontFamily: "Arial, sans-serif", maxWidth: "600px", margin: "40px auto", marginRight: "170px" }}>
         <h2 style={{ fontWeight: "bold" }}>CONFIRM YOUR LOCATION</h2>
 
-        <div style={{ display: "flex", marginTop: "40px", borderBottom: "1px solid #ccc" }}>
+        <div style={{ display: "flex", marginTop: "40px", width:"486px", borderBottom: "1px solid #ccc" }}>
           <div
             onClick={() => setActiveTab("LIST")}
             style={{
@@ -309,12 +343,12 @@ export default function PropertyForm({ onSubmit }) {
             value={formData.state}
             onChange={handleChange}
             style={{
-              width: "100%",
-              padding: "10px",
-              fontSize: "16px",
-              marginTop: "5px",
-              borderRadius: "4px",
-              border: "1px solid #aaa"
+             width: "81%",
+            padding: "10px",
+            fontSize: "16px",
+            marginTop: "5px",
+            borderRadius: "4px",
+            border: "1px solid #aaa"
             }}
           >
             <option value="">Select State</option>
@@ -330,27 +364,30 @@ export default function PropertyForm({ onSubmit }) {
 
         <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
           <div style={{
-            width: "100px",
-            height: "100px",
-            borderRadius: "60%",
-            backgroundColor: "#3f51b5",
-            color: "white",
-            fontSize: "48px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative"
+          width: "100px",
+          height: "100px",
+          borderRadius: "60%",
+          backgroundColor: "#3f51b5",
+          color: "white",
+          fontSize: "48px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative"
           }}>
             S
             <div style={{
-              position: "absolute",
-              bottom: 2,
-              backgroundColor: "lightgray",
-              width: "40%",
-              height: "20px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
+            alignItems: "center",
+            position: "absolute",
+            bottom: 0,
+            backgroundColor:"rgba(0, 47, 52, .7)",
+            cursor: "pointer",
+            left: "20px",
+            width: "50px",
+            height: "33px",
+            display: "flex",
+            justifyContent: "center",
+            right: "29px",
             }}>
               <span role="img" aria-label="camera" style={{ fontSize: "20px" }}>📷</span>
             </div>
@@ -365,15 +402,15 @@ export default function PropertyForm({ onSubmit }) {
               value={formData.name}
               readOnly
               style={{
-                width: "70%",
-                padding: "10px",
-                fontSize: "16px",
-                marginTop: "5px",
-                borderRadius: "4px",
-                border: "1px solid #aaa"
+               width: "55%",
+              padding: "12px",
+              fontSize: "16px",
+              marginTop: "5px",
+              borderRadius: "4px",
+              border: "1px solid #aaa"
               }}
             />
-            <div style={{ textAlign: "right", marginRight: "170px", fontSize: "12px", color: "#666" }}>13 / 30</div>
+            <div style={{ textAlign: "right", marginRight: "260px", fontSize: "12px", color: "#666" }}>13 / 30</div>
           </div>
         </div>
 
@@ -390,12 +427,12 @@ export default function PropertyForm({ onSubmit }) {
             onChange={handleChange}
             placeholder="+91"
             style={{
-              width: "70%",
-              padding: "10px",
-              fontSize: "16px",
-              marginTop: "5px",
-              borderRadius: "4px",
-              border: "1px solid #aaa"
+            width: "61%",
+            padding: "15px",
+            fontSize: "14px",
+            marginTop: "15px",
+            borderRadius: "4px",
+            border: "1px solid #aaa"
             }}
           />
         </div>

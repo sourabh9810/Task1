@@ -41,11 +41,26 @@ const PostAdForm = () => {
     console.log("Form Submitted:", formData);
     alert("Ad Posted Successfully!");
   };
+  const handleSetCover = (index) => {
+  console.log(`Set photo ${index} as cover`);
+  // Yahan formData me cover photo set karne ki logic likho
+};
+
+const handleRemovePhoto = (index) => {
+  console.log(`Remove photo at index ${index}`);
+  const newPhotos = [...formData.photos];
+  newPhotos.splice(index, 1);
+  setFormData({ ...formData, photos: newPhotos });
+};
+
 
   return (
     
     <form className="form-container" onSubmit={handleSubmit}>
       <h2 className="form-title">Post Your Ad</h2>
+      <h3>Selected category</h3>
+      <p>cars / cars <span className="change-link">Change</span></p>
+
 
       <div className="form-section">
         <label>Brand *</label>
@@ -125,44 +140,65 @@ const PostAdForm = () => {
         <input type="text" name="price" value={formData.price} onChange={handleChange} />
       </div>     
       <div className="form-section">
-        <label>Upload up to 20 photos</label>
-          <div className="photo-grid">
-          {[...Array(20)].map((_, index) => (
-            <div
-              key={index}
-              className={`photo-slot ${formData.photos[index] ? "has-image" : ""}`}
-              onClick={() => document.getElementById("photoInput").click()}
+  <label>Upload up to 20 photos</label>
+  <div className="photo-grid">
+    {[...Array(20)].map((_, index) => (
+      <div
+        key={index}
+        className={`photo-slot ${formData.photos[index] ? "has-image" : ""}`}
+        onClick={() => document.getElementById("photoInput").click()}
+      >
+        {formData.photos[index] ? (
+          <>
+            <img
+              src={URL.createObjectURL(formData.photos[index])}
+              alt={`Upload ${index + 1}`}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+            <button
+              className="cover-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSetCover(index);
+              }}
             >
-              {formData.photos[index] ? (
-                <img 
-                  src={URL.createObjectURL(formData.photos[index])} 
-                  alt={`Upload ${index + 20}`}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-              ) : (
-                <>
-                  <span className="camera-icon">📷</span>
-                  <span className="photo-text">Add Photo</span>
-                </>
-              )}
-            </div>
-          ))}
-          <input
-            type="file"
-            id="photoInput"
-            accept="image/*"
-            multiple
-            style={{ display: "none" }}
-            onChange={handleFileChange}
-          />
-        </div>
+              Cover
+            </button>
+            <button
+              className="close-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRemovePhoto(index);
+              }}
+            >
+              ×
+            </button>
+          </>
+        ) : (
+          <>
+            <span className="camera-icon">📷</span>
+            <span className="photo-text">Add Photo</span>
+          </>
+        )}
       </div>
+    ))}
+    <input
+      type="file"
+      id="photoInput"
+      accept="image/*"
+      multiple
+      style={{ display: "none" }}
+      onChange={handleFileChange}
+    />
+  </div>
+</div>
+
 
       <div style={{ fontFamily: "Arial, sans-serif", maxWidth: "600px", margin: "40px auto" , marginRight:"170px" }}>
       <h2 style={{ fontWeight: "bold" ,  }}>CONFIRM YOUR LOCATION</h2>
 
       {/* Tabs */}
-      <div style={{ display: "flex", marginTop: "40px", borderBottom: "1px solid #ccc" }}>
+      <div style={{ display: "flex", marginTop: "40px",  width:"486px",borderBottom: "1px solid #ccc" }}>
         <div
           onClick={() => setActiveTab("LIST")}
           style={{
@@ -198,7 +234,7 @@ const PostAdForm = () => {
          
 
           style={{
-            width: "100%",
+            width: "81%",
             padding: "10px",
             fontSize: "16px",
             marginTop: "5px",
@@ -233,15 +269,19 @@ const PostAdForm = () => {
         }}>
           S
           <div style={{
+            alignItems: "center",
             position: "absolute",
-            bottom: 2,
-            backgroundColor:"lightgray",
-            
-            width: "40%",
-            height: "20px",
+            bottom: 0,
+            backgroundColor:"rgba(0, 47, 52, .7)",
+            cursor: "pointer",
+            left: "0px",
+            width: "50px",
+            height: "33px",
             display: "flex",
             justifyContent: "center",
-            alignItems: "center"
+            right: "29px",
+            
+          
           }}>
             <span role="img" aria-label="camera" style={{ fontSize: "20px" }}>📷</span>
           </div>
@@ -255,15 +295,15 @@ const PostAdForm = () => {
             value="Sourabh Kumar"
             readOnly
             style={{
-              width: "70%",
-              padding: "10px",
+              width: "55%",
+              padding: "12px",
               fontSize: "16px",
               marginTop: "5px",
               borderRadius: "4px",
               border: "1px solid #aaa"
             }}
           />
-          <div style={{ textAlign: "right",  marginRight:"170px", fontSize: "12px", color: "#666" }}>13 / 30</div>
+          <div style={{ textAlign: "right",  marginRight:"260px", fontSize: "12px", color: "#666" }}>13 / 30</div>
         </div>
       </div>
 
@@ -277,10 +317,10 @@ const PostAdForm = () => {
           id="phone"
           placeholder="+91"
           style={{
-            width: "70%",
-            padding: "10px",
-            fontSize: "16px",
-            marginTop: "5px",
+            width: "61%",
+            padding: "15px",
+            fontSize: "14px",
+            marginTop: "15px",
             borderRadius: "4px",
             border: "1px solid #aaa"
           }}
