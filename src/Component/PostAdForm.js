@@ -60,9 +60,7 @@ const handleRemovePhoto = (index) => {
       <h2 className="form-title">Post Your Ad</h2>
       <h3>Selected category</h3>
       <p>cars / cars <span className="change-link">Change</span></p>
-
-
-      <div className="form-section">
+     <div className="form-section">
         <label>Brand *</label>
         <input type="text" name="brand" value={formData.brand} onChange={handleChange} />
 
